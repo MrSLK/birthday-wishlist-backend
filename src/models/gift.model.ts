@@ -32,6 +32,7 @@ const giftSchema = new Schema<IGift>({
   reserved: { type: Boolean, required: true, default: false },
   productUrl: { type: String, required: true },
   size: { type: String, required: false },
+  price: { type: Number, required: true },
   reservedBy: {
     name: { type: String, required: false, default: null },
     email: { type: String, required: false, default: null },
