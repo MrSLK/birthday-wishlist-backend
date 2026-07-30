@@ -8,7 +8,7 @@ const app = express();
 // Define allowed origins
 const allowedOrigins = [
   "http://localhost:5173", // Vite dev server
-  " https://lalosbirthdaywishlist.netlify.app" // Production frontend
+  "https://lalosbirthdaywishlist.netlify.app" // Production frontend
 ];
 
 app.use(
@@ -25,6 +25,13 @@ app.use(
 );
 
 app.use(express.json());
+
+app.get("/", (_, res) => {
+  res.json({
+    success: true,
+    message: "Mulalo API is running"
+  });
+});
 
 app.use("/gifts", giftRoutes);
 
