@@ -33,12 +33,13 @@ export const getGifts = async (req: Request, res: Response) => {
 
     const skip = (page - 1) * limit;
 
-    const [items, total] = await Promise.all([
+    const [items, total, reservedGiftCounter] = await Promise.all([
       GiftModel.find(filter)
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit),
       GiftModel.countDocuments(filter),
+      GiftModel.countDocuments({ reserved: true }),
     ]);
 
     return res.status(200).json({
@@ -47,6 +48,7 @@ export const getGifts = async (req: Request, res: Response) => {
       page,
       limit,
       totalPages: Math.ceil(total / limit),
+      reservedGiftCounter,
     });
   } catch (error) {
     console.error(error);
